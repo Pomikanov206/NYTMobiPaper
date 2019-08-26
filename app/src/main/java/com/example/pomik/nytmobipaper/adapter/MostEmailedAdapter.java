@@ -1,8 +1,5 @@
 package com.example.pomik.nytmobipaper.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +19,7 @@ public class MostEmailedAdapter extends RecyclerView.Adapter<MostEmailedAdapter.
     private List<MostEmailedResult> results;
     private MostEmailedPresenter presenter;
 
-    public MostEmailedAdapter(List<MostEmailedResult> results,MostEmailedPresenter presenter) {
+    public MostEmailedAdapter(List<MostEmailedResult> results, MostEmailedPresenter presenter) {
         this.results = results;
         this.presenter = presenter;
     }
@@ -78,7 +75,7 @@ public class MostEmailedAdapter extends RecyclerView.Adapter<MostEmailedAdapter.
                 favorite.setPublishedDate(results.get(i).getPublishedDate());
                 favorite.setArticleIconAddres(imagePath);
 
-                presenter.addToFavorite(favorite);
+                presenter.addFavoriteToDatabase(favorite);
             }
         });
     }

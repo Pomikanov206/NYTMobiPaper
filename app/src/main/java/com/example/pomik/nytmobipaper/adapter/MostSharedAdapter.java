@@ -9,15 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.pomik.nytmobipaper.R;
+import com.example.pomik.nytmobipaper.model.Favorite;
 import com.example.pomik.nytmobipaper.model.retrofit.mostshared.MostSharedResult;
+import com.example.pomik.nytmobipaper.presenter.MostSharedPresenter;
 
 import java.util.List;
 
 public class MostSharedAdapter extends RecyclerView.Adapter<MostSharedAdapter.MostSharedViewHolder> {
     private List<MostSharedResult> results;
+    private MostSharedPresenter presenter;
 
-    public MostSharedAdapter(List<MostSharedResult> results) {
+    public MostSharedAdapter(List<MostSharedResult> results, MostSharedPresenter presenter) {
         this.results = results;
+        this.presenter = presenter;
     }
 
     public static class MostSharedViewHolder extends RecyclerView.ViewHolder {
@@ -59,6 +63,21 @@ public class MostSharedAdapter extends RecyclerView.Adapter<MostSharedAdapter.Mo
         mostSharedViewHolder.emailedDate.setText(results.get(i).getPublishedDate());
         mostSharedViewHolder.articleDetails.setText("More...");
         // <-----------
+        mostSharedViewHolder.favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String imagePath = presenter.saveImage(mostSharedViewHolder.articleIcon);
+
+                Favorite favorite = new Favorite();
+                favorite.setId(results.get(i).getId());
+                favorite.setTitle(results.get(i).getTitle());
+                favorite.setArticleAbstract(results.get(i).getAbstract());
+                favorite.setPublishedDate(results.get(i).getPublishedDate());
+                favorite.setArticleIconAddres(imagePath);
+
+                presenter.addFavoriteToDatabase(favorite);
+            }
+        });
     }
 
     @Override

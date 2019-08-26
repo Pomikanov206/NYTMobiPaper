@@ -29,7 +29,7 @@ public class MostEmailedPresenter implements MostEmailedRequester{
         model.requestMostEmailed(this);
     }
 
-    public void addToFavorite(Favorite favorite) {
+    public void addFavoriteToDatabase(Favorite favorite) {
         databaseModel.addFavorite(favorite);
     }
 

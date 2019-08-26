@@ -44,7 +44,7 @@ public class MostViewedFragment extends Fragment implements MostPopularDisplayed
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new MostViewedAdapter(results);
+        mAdapter = new MostViewedAdapter(results, presenter);
         recyclerView.setAdapter(mAdapter);
 
         presenter.requestMostViewed();
@@ -55,7 +55,7 @@ public class MostViewedFragment extends Fragment implements MostPopularDisplayed
     public void showMostViewed(MostViewed mostViewed) {
         results = mostViewed.getResults();
 
-        mAdapter = new MostViewedAdapter(results);
+        mAdapter = new MostViewedAdapter(results, presenter);
         recyclerView.setAdapter(mAdapter);
     }
 }
