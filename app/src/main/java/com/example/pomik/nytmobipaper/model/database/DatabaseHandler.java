@@ -111,7 +111,15 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
     }
 
     @Override
-    public boolean isContains(String string) {
-        return false;
+    public boolean isContainsInDatabase(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * from " + TABLE_FAVORITES + " where " + KEY_ID + " = " + id;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.getCount() <= 0) {
+            cursor.close();
+            return false;
+        }
+        cursor.close();
+        return true;
     }
 }

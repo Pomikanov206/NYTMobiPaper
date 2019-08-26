@@ -54,4 +54,6 @@ public class FavoritesFragment extends Fragment implements MostPopularDisplayed.
     public void showFavorites() {
 
     }
+
+
 }

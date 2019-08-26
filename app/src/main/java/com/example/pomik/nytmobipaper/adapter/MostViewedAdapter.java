@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.example.pomik.nytmobipaper.MainActivity;
 import com.example.pomik.nytmobipaper.R;
 import com.example.pomik.nytmobipaper.model.Favorite;
 import com.example.pomik.nytmobipaper.model.retrofit.mostviewed.MostViewedResult;
@@ -55,7 +56,11 @@ public class MostViewedAdapter extends RecyclerView.Adapter<MostViewedAdapter.Mo
 
     @Override
     public void onBindViewHolder(@NonNull MostViewedAdapter.MostViewedViewHolder mostViewedViewHolder, int i) {
-        mostViewedViewHolder.favorite.setImageResource(R.drawable.favorite);
+        if (presenter.isContainsInDatabase(String.valueOf(results.get(i).getId())))
+            mostViewedViewHolder.favorite.setImageResource(R.drawable.favorite_active);
+        else
+            mostViewedViewHolder.favorite.setImageResource(R.drawable.favorite_not_active);
+
         new DownloadImageTask(mostViewedViewHolder.articleIcon)
                 .execute(results.get(i).getMedia().get(0).getMediaMetadata().get(1).getUrl());
         mostViewedViewHolder.title.setText(results.get(i).getTitle());
@@ -75,7 +80,11 @@ public class MostViewedAdapter extends RecyclerView.Adapter<MostViewedAdapter.Mo
                 favorite.setPublishedDate(results.get(i).getPublishedDate());
                 favorite.setArticleIconAddres(imagePath);
 
+                mostViewedViewHolder.favorite.setImageResource(R.drawable.favorite_active);
+
                 presenter.addFavoriteToDatabase(favorite);
+
+                MainActivity.viewPager1.getAdapter().notifyDataSetChanged();
             }
         });
     }

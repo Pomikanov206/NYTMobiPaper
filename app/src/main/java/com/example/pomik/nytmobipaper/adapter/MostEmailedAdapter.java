@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.example.pomik.nytmobipaper.MainActivity;
 import com.example.pomik.nytmobipaper.R;
 import com.example.pomik.nytmobipaper.model.Favorite;
 import com.example.pomik.nytmobipaper.model.retrofit.mostemailed.MostEmailedResult;
@@ -55,13 +56,18 @@ public class MostEmailedAdapter extends RecyclerView.Adapter<MostEmailedAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MostEmailedViewHolder mostEmailedViewHolder, int i) {
-        mostEmailedViewHolder.favorite.setImageResource(R.drawable.favorite);
         new DownloadImageTask(mostEmailedViewHolder.articleIcon)
                 .execute(results.get(i).getMedia().get(0).getMediaMetadata().get(1).getUrl());
         mostEmailedViewHolder.title.setText(results.get(i).getTitle());
         mostEmailedViewHolder.articleAbstract.setText(results.get(i).getAbstract());
         mostEmailedViewHolder.emailedDate.setText(results.get(i).getPublishedDate());
         mostEmailedViewHolder.articleDetails.setText("More...");
+
+        if (presenter.isContainsInDatabase(String.valueOf(results.get(i).getId())))
+            mostEmailedViewHolder.favorite.setImageResource(R.drawable.favorite_active);
+        else
+            mostEmailedViewHolder.favorite.setImageResource(R.drawable.favorite_not_active);
+
          // <-----------
         mostEmailedViewHolder.favorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,8 +80,11 @@ public class MostEmailedAdapter extends RecyclerView.Adapter<MostEmailedAdapter.
                 favorite.setArticleAbstract(results.get(i).getAbstract());
                 favorite.setPublishedDate(results.get(i).getPublishedDate());
                 favorite.setArticleIconAddres(imagePath);
+                mostEmailedViewHolder.favorite.setImageResource(R.drawable.favorite_active);
 
                 presenter.addFavoriteToDatabase(favorite);
+
+                MainActivity.viewPager1.getAdapter().notifyDataSetChanged();
             }
         });
     }

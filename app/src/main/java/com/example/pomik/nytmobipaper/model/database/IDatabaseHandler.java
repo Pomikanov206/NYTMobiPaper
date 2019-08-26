@@ -15,5 +15,5 @@ public interface IDatabaseHandler {
 
     void deleteFavorite(Favorite favorite);
 
-    boolean isContains(String string);
+    boolean isContainsInDatabase(String id);
 }

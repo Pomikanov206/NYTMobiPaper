@@ -36,4 +36,8 @@ public class MostEmailedPresenter implements MostEmailedRequester{
     public String saveImage(ImageView imageView) {
         return imageSaver.saveImage(imageView);
     }
+
+    public boolean isContainsInDatabase(String id) {
+        return databaseModel.isContainsInDatabase(id);
+    }
 }

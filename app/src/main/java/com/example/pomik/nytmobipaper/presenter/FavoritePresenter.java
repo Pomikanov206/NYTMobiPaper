@@ -1,7 +1,6 @@
 package com.example.pomik.nytmobipaper.presenter;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 import com.example.pomik.nytmobipaper.model.Favorite;
 import com.example.pomik.nytmobipaper.model.ImageSaver;
 import com.example.pomik.nytmobipaper.model.database.DatabaseHandler;
@@ -20,9 +19,6 @@ public class FavoritePresenter {
         imageSaver = ImageSaver.getInstance();
     }
 
-    public void addFavorite(Favorite favorite) {
-        model.addFavorite(favorite);
-    }
     public void deleteFavorite(Favorite favorite) {
         model.deleteFavorite(favorite);
     }

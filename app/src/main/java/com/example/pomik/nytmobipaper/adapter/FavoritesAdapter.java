@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.example.pomik.nytmobipaper.MainActivity;
 import com.example.pomik.nytmobipaper.R;
 import com.example.pomik.nytmobipaper.model.Favorite;
 import com.example.pomik.nytmobipaper.presenter.FavoritePresenter;
@@ -54,13 +55,17 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.FavoriteHolder favoriteHolder, int i) {
-        favoriteHolder.favorite.setImageResource(R.drawable.favorite);
+        favoriteHolder.favorite.setImageResource(R.drawable.favorite_active);
         favoriteHolder.articleIcon.setImageBitmap(presenter.loadImage(results.get(i).getArticleIconAddres()));
         favoriteHolder.title.setText(results.get(i).getTitle());
         favoriteHolder.articleAbstract.setText(results.get(i).getArticleAbstract());
         favoriteHolder.emailedDate.setText(results.get(i).getPublishedDate());
         favoriteHolder.articleDetails.setText("More...");
+
         // <-----------
+
+        FavoritesAdapter adapter = this;
+
         favoriteHolder.favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +77,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                 favorite.setArticleIconAddres("");
 
                 presenter.deleteFavorite(favorite);
+
+                MainActivity.viewPager1.getAdapter().notifyDataSetChanged();
             }
         });
     }
@@ -80,4 +87,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public int getItemCount() {
         return results.size();
     }
+
+
+
 }
