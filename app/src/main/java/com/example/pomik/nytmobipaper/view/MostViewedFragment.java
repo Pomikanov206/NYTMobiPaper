@@ -38,6 +38,9 @@ public class MostViewedFragment extends Fragment implements MostPopularDisplayed
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.most_viewed, container, false);
 
+        TextView title = view.findViewById(R.id.viewed_copyrigh);
+        title.setText("Most Viewed");
+
         recyclerView = view.findViewById(R.id.mostviewed_recyclerview);
         recyclerView.setHasFixedSize(true);
 

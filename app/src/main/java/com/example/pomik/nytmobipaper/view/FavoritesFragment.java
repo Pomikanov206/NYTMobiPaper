@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import com.example.pomik.nytmobipaper.R;
 import com.example.pomik.nytmobipaper.adapter.FavoritesAdapter;
 import com.example.pomik.nytmobipaper.adapter.MostEmailedAdapter;
@@ -35,6 +36,9 @@ public class FavoritesFragment extends Fragment implements MostPopularDisplayed.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favorites, container, false);
+
+        TextView title = view.findViewById(R.id.favorite_fragment_title);
+        title.setText("Favorites");
 
         recyclerView = view.findViewById(R.id.favirires_recyclerview);
         recyclerView.setHasFixedSize(true);

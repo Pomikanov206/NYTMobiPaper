@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import com.example.pomik.nytmobipaper.R;
 import com.example.pomik.nytmobipaper.adapter.MostEmailedAdapter;
 import com.example.pomik.nytmobipaper.model.retrofit.mostemailed.MostEmailed;
@@ -36,6 +37,9 @@ public class MostEmailedFragment extends Fragment implements MostPopularDisplaye
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.most_emailed, container, false);
+
+        TextView title = view.findViewById(R.id.emailed_copyrigh);
+        title.setText("Most Emailed");
 
         recyclerView = view.findViewById(R.id.mostemailed_recyclerview);
         recyclerView.setHasFixedSize(true);

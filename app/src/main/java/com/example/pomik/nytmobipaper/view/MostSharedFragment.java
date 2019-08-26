@@ -37,6 +37,9 @@ public class MostSharedFragment extends Fragment implements MostPopularDisplayed
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.most_shared, container, false);
 
+        TextView title = view.findViewById(R.id.shared_copyrigh);
+        title.setText("Most Shared");
+
         recyclerView = view.findViewById(R.id.mostshared_recyclerview);
         recyclerView.setHasFixedSize(true);
 
