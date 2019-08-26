@@ -43,7 +43,7 @@ public class MostEmailedFragment extends Fragment implements MostPopularDisplaye
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new MostEmailedAdapter(results);
+        mAdapter = new MostEmailedAdapter(results,presenter);
         recyclerView.setAdapter(mAdapter);
 
         presenter.requestMostEmailed();
@@ -54,7 +54,7 @@ public class MostEmailedFragment extends Fragment implements MostPopularDisplaye
     public void showMostEmailed(MostEmailed mostEmailed) {
         results = new ArrayList<>(Arrays.asList(mostEmailed.getResults()));
 
-        mAdapter = new MostEmailedAdapter(results);
+        mAdapter = new MostEmailedAdapter(results,presenter);
         recyclerView.setAdapter(mAdapter);
     }
 }

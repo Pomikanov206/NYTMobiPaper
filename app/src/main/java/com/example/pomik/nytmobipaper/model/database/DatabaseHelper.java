@@ -3,6 +3,7 @@ package com.example.pomik.nytmobipaper.model.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import com.example.pomik.nytmobipaper.model.Favorite;
 import com.example.pomik.nytmobipaper.model.retrofit.mostemailed.MostEmailedResult;
 import com.example.pomik.nytmobipaper.model.retrofit.mostshared.MostSharedResult;
 import com.example.pomik.nytmobipaper.model.retrofit.mostviewed.MostViewedResult;
@@ -26,6 +27,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private MostEmailedDAO mostEmailedDao = null;
     private MostSharedDAO mostSharedDao = null;
     private MostViewedDAO mostViewedDao = null;
+    private FavoritesDAO favoritesDAO = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -74,6 +76,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             mostViewedDao = new MostViewedDAO(getConnectionSource(), MostViewedResult.class);
         }
         return mostViewedDao;
+    }
+
+    public FavoritesDAO getFavoritesDAO() throws SQLException {
+        if (favoritesDAO == null) {
+            favoritesDAO = new FavoritesDAO(getConnectionSource(), Favorite.class);
+        }
+        return favoritesDAO;
     }
 
     @Override

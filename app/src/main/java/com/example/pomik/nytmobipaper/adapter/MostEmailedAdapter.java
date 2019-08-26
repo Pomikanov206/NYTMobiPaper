@@ -1,5 +1,8 @@
 package com.example.pomik.nytmobipaper.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,15 +12,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.pomik.nytmobipaper.R;
+import com.example.pomik.nytmobipaper.model.Favorite;
 import com.example.pomik.nytmobipaper.model.retrofit.mostemailed.MostEmailedResult;
+import com.example.pomik.nytmobipaper.presenter.MostEmailedPresenter;
 
 import java.util.List;
 
 public class MostEmailedAdapter extends RecyclerView.Adapter<MostEmailedAdapter.MostEmailedViewHolder>{
     private List<MostEmailedResult> results;
+    private MostEmailedPresenter presenter;
 
-    public MostEmailedAdapter(List<MostEmailedResult> results) {
+    public MostEmailedAdapter(List<MostEmailedResult> results,MostEmailedPresenter presenter) {
         this.results = results;
+        this.presenter = presenter;
     }
 
     public static class MostEmailedViewHolder extends RecyclerView.ViewHolder {
@@ -59,6 +66,21 @@ public class MostEmailedAdapter extends RecyclerView.Adapter<MostEmailedAdapter.
         mostEmailedViewHolder.emailedDate.setText(results.get(i).getPublishedDate());
         mostEmailedViewHolder.articleDetails.setText("More...");
          // <-----------
+        mostEmailedViewHolder.favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String imagePath = presenter.saveImage(mostEmailedViewHolder.articleIcon);
+
+                Favorite favorite = new Favorite();
+                favorite.setId(results.get(i).getId());
+                favorite.setTitle(results.get(i).getTitle());
+                favorite.setArticleAbstract(results.get(i).getAbstract());
+                favorite.setPublishedDate(results.get(i).getPublishedDate());
+                favorite.setArticleIconAddres(imagePath);
+
+                presenter.addToFavorite(favorite);
+            }
+        });
     }
 
     @Override

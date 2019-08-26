@@ -4,6 +4,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.pomik.nytmobipaper.adapter.PagerAdapter;
+import com.example.pomik.nytmobipaper.model.ImageSaver;
+import com.example.pomik.nytmobipaper.model.database.DatabaseHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,5 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(0);
+
+        DatabaseHandler.getInstance(getApplicationContext());
+        ImageSaver.getInstance(getApplicationContext());
     }
 }

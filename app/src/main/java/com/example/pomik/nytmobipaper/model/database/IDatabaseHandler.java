@@ -1,29 +1,19 @@
 package com.example.pomik.nytmobipaper.model.database;
 
-import com.example.pomik.nytmobipaper.model.retrofit.mostemailed.MostEmailedResult;
-import com.example.pomik.nytmobipaper.model.retrofit.mostshared.MostSharedResult;
-import com.example.pomik.nytmobipaper.model.retrofit.mostviewed.MostViewedResult;
+import com.example.pomik.nytmobipaper.model.Favorite;
 
 import java.util.List;
 
 public interface IDatabaseHandler {
-    void addMostEmailed(MostEmailedResult mostEmailed);
-    void addMostShared(MostSharedResult mostShared);
-    void addMostViewed(MostViewedResult mostViewed);
+    void addFavorite(Favorite favorite);
 
-    MostEmailedResult getMostEmailed(int id);
-    MostSharedResult getMostShared(int id);
-    MostViewedResult getMostViewed(int id);
+    Favorite getFavorite(int id);
 
-    List<MostEmailedResult> getAllMostEmailed();
-    List<MostSharedResult> getAllMostShared();
-    List<MostViewedResult> getAllMostViewed();
+    List<Favorite> getAllFavorites();
 
-    int getCountMostEmailed();
-    int getCountMostShared();
-    int getCountMostViewed();
+    int getCountFavorites();
 
-    void deleteMostEmailed(MostEmailedResult mostEmailed);
-    void deleteMostShared(MostSharedResult mostShared);
-    void deleteMostViewed(MostViewedResult mostViewed);
+    void deleteFavorite(Favorite favorite);
+
+    boolean isContains(String string);
 }
